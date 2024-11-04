@@ -1,1 +1,468 @@
-ciao
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome Cognome - Studente di Informatica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6200ee;
+            --secondary-color: #03dac6;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+            transition: background-color 2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%);
+            transform: rotate(45deg);
+            animation: headerShine 15s linear infinite;
+        }
+        
+        @keyframes headerShine {
+            from { transform: rotate(45deg) translateY(0); }
+            to { transform: rotate(45deg) translateY(100%); }
+        }
+        
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .hero {
+            background-image: url('https://source.unsplash.com/random/1600x900/?technology');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 100%;
+        }
+        
+        .skills-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(3,218,198,0.1) 0%, rgba(3,218,198,0) 80%);
+            transform: rotate(45deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover::before {
+            transform: rotate(45deg) translateY(10%);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 1s;
+        }
+        
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+        }
+            .progress-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 6px;
+                height: 0;
+                background: linear-gradient(to top, #03dac6, #6200ee);
+                z-index: 1002;
+                transition: height 0.1s ease-out;
+            }
+
+            @media (max-width: 768px) {
+                .progress-bar {
+                    width: 2px;
+                }
+            }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    <header>
+        <div class="container">
+            <h1>Nome Cognome</h1>
+            <p>Studente di Informatica</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">Chi sono</a></li>
+            <li><a href="#skills">Competenze</a></li>
+            <li><a href="#projects">Progetti</a></li>
+            <li><a href="#contact">Contatti</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Benvenuto nel mio mondo digitale</h1>
+            <p>Esplora i miei progetti e le mie competenze nel campo dell'informatica</p>
+        </div>
+    </section>
+    
+    <main class="container">
+        <section id="about" class="section hidden">
+            <h2 class="section-title">Chi sono</h2>
+            <p>Sono uno studente italiano appassionato di informatica. Attualmente sto studiando [inserisci dettagli sul tuo corso] presso [nome dell'università]. La mia passione per la tecnologia mi spinge a cercare continuamente nuove sfide e opportunità di apprendimento nel vasto mondo dell'informatica.</p>
+        </section>
+        
+        <section id="skills" class="section">
+            <h2 class="section-title">Le mie competenze</h2>
+            <div class="skills-grid">
+                <div class="card hidden">
+                    <h3>Programmazione</h3>
+                    <p>Java, Python, C++</p>
+                </div>
+                <div class="card hidden">
+                    <h3>Sviluppo Web</h3>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+                <div class="card hidden">
+                    <h3>Database</h3>
+                    <p>MySQL, MongoDB</p>
+                </div>
+                <div class="card hidden">
+                    <h3>Framework</h3>
+                    <p>React, Node.js</p>
+                </div>
+                <div class="card hidden">
+                    <h3>DevOps</h3>
+                    <p>Git, Docker, CI/CD</p>
+                </div>
+                <div class="card hidden">
+                    <h3>Cloud</h3>
+                    <p>AWS, Google Cloud</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects" class="section">
+            <h2 class="section-title">I miei progetti</h2>
+            <div class="projects-grid">
+                <div class="card project-card hidden">
+                    <img src="https://source.unsplash.com/random/400x300/?coding" alt="Progetto 1">
+                    <h3>Nome Progetto 1</h3>
+                    <p>Breve descrizione del progetto e delle tecnologie utilizzate.</p>
+                </div>
+                <div class="card project-card hidden">
+                    <img src="https://source.unsplash.com/random/400x300/?computer" alt="Progetto 2">
+                    <h3>Nome Progetto 2</h3>
+                    <p>Breve descrizione del progetto e delle tecnologie utilizzate.</p>
+                </div>
+                <div class="card project-card hidden">
+                    <img src="https://source.unsplash.com/random/400x300/?software" alt="Progetto 3">
+                    <h3>Nome Progetto 3</h3>
+                    <p>Breve descrizione del progetto e delle tecnologie utilizzate.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section hidden">
+            <h2 class="section-title">Contattami</h2>
+            <p>Se vuoi collaborare o hai domande, non esitare a contattarmi:</p>
+            <p>Email: tuaemail@esempio.com</p>
+            <p>LinkedIn: [Link al tuo profilo LinkedIn]</p>
+            <p>GitHub: [Link al tuo profilo GitHub]</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Nome Cognome. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animazione di comparsa degli elementi
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        // Cambio dinamico del colore di sfondo dell'header
+        function changeHeaderColor() {
+            const header = document.querySelector('header');
+            const colors = ['#6200ee', '#3700b3', '#03dac6', '#018786'];
+            let currentIndex = 0;
+
+            function nextColor() {
+                header.style.backgroundColor = colors[currentIndex];
+                currentIndex = (currentIndex + 1) % colors.length;
+            }
+
+            // Cambia colore immediatamente all'avvio
+            nextColor();
+
+            // Cambia colore ogni 10 secondi
+            setInterval(nextColor, 10000);
+        }
+
+        changeHeaderColor();
+
+        // Effetto parallasse per l'hero section
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrollPosition = window.pageYOffset;
+            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Animazione del titolo della sezione al passaggio del mouse
+        const sectionTitles = document.querySelectorAll('.section-title');
+        sectionTitles.forEach(title => {
+            title.addEventListener('mouseenter', () => {
+                title.style.color = '#03dac6';
+            });
+            title.addEventListener('mouseleave', () => {
+                title.style.color = '#6200ee';
+            });
+        });
+
+        // Aggiunta dinamica di un nuovo progetto
+        function addNewProject() {
+            const projectsGrid = document.querySelector('.projects-grid');
+            const newProject = document.createElement('div');
+            newProject.className = 'card project-card hidden';
+            newProject.innerHTML = `
+                <img src="https://source.unsplash.com/random/400x300/?technology" alt="Nuovo Progetto">
+                <h3>Nuovo Progetto</h3>
+                <p>Questo progetto è stato aggiunto dinamicamente!</p>
+            `;
+            projectsGrid.appendChild(newProject);
+            observer.observe(newProject);
+        }
+
+        // Aggiungi un nuovo progetto dopo 15 secondi
+        setTimeout(addNewProject, 15000);
+
+        // Barra di progresso verticale
+        function updateProgressBar() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.height = scrollPercentage + '%';
+            
+            // Effetto parallasse per la barra di progresso
+            progressBar.style.filter = `hue-rotate(${scrollPercentage * 3.6}deg)`;
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+        window.addEventListener('resize', updateProgressBar);
+
+        // Inizializza la barra di progresso
+        updateProgressBar();
+    </script>
+</body>
+</html> 
