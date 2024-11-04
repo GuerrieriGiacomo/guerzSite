@@ -3,119 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nome Cognome - Studente di Informatica</title>
+    <title>Giacomo Guerrieri - Studente di Informatica</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #6200ee;
-            --secondary-color: #03dac6;
-            --text-color: #333;
-            --bg-color: #f5f5f5;
-            --card-bg: #ffffff;
+        /* Stile per il Modal */
+        .modal {
+            display: none; /* Nasconde il modal per default */
+            position: fixed; /* Rende il modal visibile sopra il contenuto */
+            z-index: 1001; /* Sovrapponi il modal sopra altri elementi */
+            left: 0;
+            top: 0;
+            width: 100%; /* Larghezza piena */
+            height: 100%; /* Altezza piena */
+            overflow: auto; /* Aggiunge lo scroll se necessario */
+            background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente */
         }
-        
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 15% auto; /* Centrato */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Larghezza del modal */
+            max-width: 500px; /* Limite di larghezza */
+            border-radius: 10px; /* Angoli arrotondati */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        :root {
+            --primary-color: #0a84ff; /* Colore principale */
+            --secondary-color: #5e5ce6;
+            --text-color: #ffffff; /* Colore del testo */
+            --bg-color: #0d1117; /* Sfondo scuro per un contrasto migliore */
+            --card-bg: #161b22; /* Sfondo della scheda */
+            --accent-color: #1f6feb;
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Ombra leggera per le schede */
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
+            overflow: hidden; /* Prevent scrolling while loading */
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        header {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 2rem 0;
-            text-align: center;
-            transition: background-color 2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%);
-            transform: rotate(45deg);
-            animation: headerShine 15s linear infinite;
-        }
-        
-        @keyframes headerShine {
-            from { transform: rotate(45deg) translateY(0); }
-            to { transform: rotate(45deg) translateY(100%); }
-        }
-        
+
         nav {
-            background-color: var(--secondary-color);
-            padding: 1rem 0;
-            position: sticky;
+            background-color: rgb(0, 0, 0);
+            padding: 1rem 2rem;
+            position: fixed;
             top: 0;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px var(--shadow-color);
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+            width: auto;
         }
-        
+
         nav ul {
             list-style-type: none;
             display: flex;
             justify-content: center;
+            gap: 2rem;
         }
-        
+
         nav ul li {
-            margin: 0 15px;
+            margin: 0;
         }
-        
+
         nav ul li a {
             color: var(--text-color);
             text-decoration: none;
             font-weight: bold;
+            padding: 0.5rem 1rem;
             transition: color 0.3s ease;
             position: relative;
+            font-size: 1.1rem; /* Aumentato leggermente per la leggibilità */
         }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+
+        nav ul li a:hover {
+            color: var(--primary-color); /* Cambiato colore al passaggio del mouse */
         }
-        
-        nav ul li a:hover::after {
-            transform: scaleX(1);
-        }
-        
+
         .hero {
-            background-image: url('https://source.unsplash.com/random/1600x900/?technology');
+            background-image: url('./resources/ruscello.png'); /* Usa un'immagine ad alta risoluzione */
             background-size: cover;
             background-position: center;
-            height: 60vh;
+            height: 80vh; /* Maggiore altezza per impatto visivo */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #fff;
             position: relative;
         }
-        
+
         .hero::after {
             content: '';
             position: absolute;
@@ -123,23 +130,28 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5); /* Leggero sovrapposto scuro per il testo */
         }
-        
+
         .hero-content {
             z-index: 1;
+            position: relative;
         }
-        
+
         .hero h1 {
-            font-size: 3rem;
+            font-size: 4rem; /* Aumentato per maggiore impatto */
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
+            text-shadow: 2px 2px 0 var(--primary-color), -2px -2px 0 var(--primary-color), /* Contorno attorno al testo */
+                         2px -2px 0 var(--primary-color), -2px 2px 0 var(--primary-color); /* Contorno attorno al testo */
+            color: var(--text-color); /* Colore del testo */
         }
-        
+
         .hero p {
+            font-size: 1.5rem; /* Aumentato per leggibilità */
             animation: fadeInUp 1s ease-out 0.5s both;
+            margin-top: 1rem;
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -150,141 +162,108 @@
                 transform: translateY(0);
             }
         }
-        
+
         .section {
             padding: 4rem 0;
+            color: var(--text-color);
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 2rem;
-            color: var(--primary-color);
+            font-size: 2.5rem; /* Aumentato per un aspetto più prominente */
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
         }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background-color: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-        
-        .section-title:hover::after {
-            width: 100%;
-        }
-        
+
         .skills-grid, .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
-        
+
         .card {
             background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem; /* Aumento della spaziatura */
+            border-radius: 10px; /* Angoli più morbidi */
+            box-shadow: 0 4px 10px var(--shadow-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(3,218,198,0.1) 0%, rgba(3,218,198,0) 80%);
-            transform: rotate(45deg);
-            transition: transform 0.5s ease;
-        }
-        
-        .card:hover::before {
-            transform: rotate(45deg) translateY(10%);
-        }
-        
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .project-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px 8px 0 0;
+            border-radius: 10px 10px 0 0;
             transition: transform 0.3s ease;
         }
-        
+
         .project-card:hover img {
             transform: scale(1.05);
         }
-        
+
         footer {
-            background-color: var(--primary-color);
-            color: #fff;
+            background-color: rgba(79, 81, 82, 0.1);
+            color: var(--text-color);
             text-align: center;
             padding: 2rem 0;
             margin-top: 4rem;
+            font-size: 1.1rem; /* Aumento della dimensione del testo */
         }
-        
-        .hidden {
-            opacity: 0;
-            filter: blur(5px);
-            transform: translateX(-100%);
-            transition: all 1s;
-        }
-        
-        .show {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateX(0);
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 2rem 0;
-            }
-        }
-            .progress-bar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 6px;
-                height: 0;
-                background: linear-gradient(to top, #03dac6, #6200ee);
-                z-index: 1002;
-                transition: height 0.1s ease-out;
-            }
 
-            @media (max-width: 768px) {
-                .progress-bar {
-                    width: 2px;
-                }
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Sfondo nero */
+            color: rgb(255, 255, 255); /* Colore del testo verde */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Cambiato per permettere lo scorrimento */
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace; /* Font a tema terminale */
+            z-index: 2000; /* Sotto l'overlay */
+            overflow: hidden; /* Nascondi l'overflow */
+        }
+
+        .loading-content {
+            max-height: 100%;
+            overflow: hidden;
+            white-space: pre; /* Mantiene il formato del testo */
+            font-size: 1.1rem; /* Aumenta la dimensione del testo */
+            text-align: left; /* Allinea il testo a sinistra */
+        }
+
+        .loading-line {
+            opacity: 0; /* Inizialmente invisibile */
+            animation: fadeIn 0.5s forwards; /* Animazione di comparsa */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="progress-bar"></div>
-    <header>
-        <div class="container">
-            <h1>Nome Cognome</h1>
-            <p>Studente di Informatica</p>
-        </div>
-    </header>
+    <div class="loading-screen" id="loading-screen">
+        <h1>jakiguerra.xyz</h1>
+        <h2>Caricamento in corso...</h2>
+        <div class="loading-content" id="loading-content"></div>
+    </div>
     
     <nav>
         <ul>
@@ -297,172 +276,130 @@
     
     <section class="hero">
         <div class="hero-content">
-            <h1>Benvenuto nel mio mondo digitale</h1>
+            <h1>Benvenuto nel mio mondo digitale 🖥️</h1>
             <p>Esplora i miei progetti e le mie competenze nel campo dell'informatica</p>
         </div>
     </section>
     
-    <main class="container">
-        <section id="about" class="section hidden">
+    <main class="container" style="display:none;">
+        <section id="about" class="section">
             <h2 class="section-title">Chi sono</h2>
-            <p>Sono uno studente italiano appassionato di informatica. Attualmente sto studiando [inserisci dettagli sul tuo corso] presso [nome dell'università]. La mia passione per la tecnologia mi spinge a cercare continuamente nuove sfide e opportunità di apprendimento nel vasto mondo dell'informatica.</p>
+            <p>Sono uno studente italiano appassionato di informatica. Ho studiato presso l'ITIS A. Meucci.</p>
         </section>
         
         <section id="skills" class="section">
-            <h2 class="section-title">Le mie competenze</h2>
+            <h2 class="section-title">Competenze</h2>
             <div class="skills-grid">
-                <div class="card hidden">
+                <div class="card">
                     <h3>Programmazione</h3>
-                    <p>Java, Python, C++</p>
+                    <p>Java, C++ & PHP</p>
                 </div>
-                <div class="card hidden">
+                <div class="card">
                     <h3>Sviluppo Web</h3>
-                    <p>HTML, CSS, JavaScript</p>
+                    <p>HTML, CSS & JavaScript</p>
                 </div>
-                <div class="card hidden">
+                <div class="card">
                     <h3>Database</h3>
-                    <p>MySQL, MongoDB</p>
-                </div>
-                <div class="card hidden">
-                    <h3>Framework</h3>
-                    <p>React, Node.js</p>
-                </div>
-                <div class="card hidden">
-                    <h3>DevOps</h3>
-                    <p>Git, Docker, CI/CD</p>
-                </div>
-                <div class="card hidden">
-                    <h3>Cloud</h3>
-                    <p>AWS, Google Cloud</p>
+                    <p>MySQL & MongoDB</p>
                 </div>
             </div>
         </section>
         
         <section id="projects" class="section">
-            <h2 class="section-title">I miei progetti</h2>
+            <h2 class="section-title">I miei progetti [Work in progress 🔨🔨]</h2>
             <div class="projects-grid">
-                <div class="card project-card hidden">
-                    <img src="https://source.unsplash.com/random/400x300/?coding" alt="Progetto 1">
-                    <h3>Nome Progetto 1</h3>
-                    <p>Breve descrizione del progetto e delle tecnologie utilizzate.</p>
+                <div class="project-card card">
+                    <img src="https://source.unsplash.com/random/300x200/?project" alt="Progetto 1">
+                    <h3>Progetto 1</h3>
+                    <p>Descrizione del progetto</p>
                 </div>
-                <div class="card project-card hidden">
-                    <img src="https://source.unsplash.com/random/400x300/?computer" alt="Progetto 2">
-                    <h3>Nome Progetto 2</h3>
-                    <p>Breve descrizione del progetto e delle tecnologie utilizzate.</p>
-                </div>
-                <div class="card project-card hidden">
-                    <img src="https://source.unsplash.com/random/400x300/?software" alt="Progetto 3">
-                    <h3>Nome Progetto 3</h3>
-                    <p>Breve descrizione del progetto e delle tecnologie utilizzate.</p>
+                <div class="project-card card">
+                    <img src="https://source.unsplash.com/random/300x200/?code" alt="Progetto 2">
+                    <h3>Progetto 2</h3>
+                    <p>Descrizione del progetto</p>
                 </div>
             </div>
-        </section>
-        
-        <section id="contact" class="section hidden">
-            <h2 class="section-title">Contattami</h2>
-            <p>Se vuoi collaborare o hai domande, non esitare a contattarmi:</p>
-            <p>Email: tuaemail@esempio.com</p>
-            <p>LinkedIn: [Link al tuo profilo LinkedIn]</p>
-            <p>GitHub: [Link al tuo profilo GitHub]</p>
         </section>
     </main>
     
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Nome Cognome. Tutti i diritti riservati.</p>
-        </div>
+        <p>&copy; 2024 Giacomo Guerrieri. Tutti i diritti riservati 🇮🇹.</p>
     </footer>
-
+    <!-- Modal per Contatti -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>I miei contatti</h2>
+            <p>Email: guerrierig40@gmail.com</p>
+            <p>- - WorkInProgress🔨🔨 - -</p>
+        </div>
+    </div>
     <script>
-        // Animazione di comparsa degli elementi
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                } else {
-                    entry.target.classList.remove('show');
-                }
-            });
-        });
+        const loadingMessages = [
+            "Scaricando pacchetti...",
+            "Installazione di dipendenze...",
+            "Verifica dei file...",
+            "Configurazione del sistema...",
+            "Compilazione in corso...",
+            "Esecuzione test unitari...",
+            "Caricamento risorse...",
+            "Avvio del servizio...",
+            "Sincronizzazione dei dati...",
+            "Preparazione dell'ambiente di lavoro...",
+            "Caricamento completato!"
+        ];
 
-        const hiddenElements = document.querySelectorAll('.hidden');
-        hiddenElements.forEach((el) => observer.observe(el));
+        const loadingContent = document.getElementById('loading-content');
+        let messageIndex = 0;
 
-        // Cambio dinamico del colore di sfondo dell'header
-        function changeHeaderColor() {
-            const header = document.querySelector('header');
-            const colors = ['#6200ee', '#3700b3', '#03dac6', '#018786'];
-            let currentIndex = 0;
+        function addLoadingLine() {
+            if (messageIndex < loadingMessages.length) {
+                const line = document.createElement('div');
+                line.className = 'loading-line';
+                line.innerText = loadingMessages[messageIndex];
+                loadingContent.appendChild(line);
+                messageIndex++;
 
-            function nextColor() {
-                header.style.backgroundColor = colors[currentIndex];
-                currentIndex = (currentIndex + 1) % colors.length;
+                // Scrolla il contenuto verso l'alto
+                loadingContent.scrollTop = loadingContent.scrollHeight;
             }
-
-            // Cambia colore immediatamente all'avvio
-            nextColor();
-
-            // Cambia colore ogni 10 secondi
-            setInterval(nextColor, 10000);
         }
 
-        changeHeaderColor();
+        function hideLoadingScreen() {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.querySelector('main').style.display = 'block'; // Mostra il contenuto principale
+            document.body.style.overflow = 'auto'; // Ripristina lo scroll
+        }
 
-        // Effetto parallasse per l'hero section
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('.hero');
-            const scrollPosition = window.pageYOffset;
-            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        // Aggiungi una nuova riga di caricamento ogni 1 secondo
+        const loadingInterval = setInterval(() => {
+            addLoadingLine();
+            if (messageIndex === loadingMessages.length) {
+                clearInterval(loadingInterval); // Ferma l'intervallo dopo aver mostrato tutti i messaggi
+                setTimeout(hideLoadingScreen, 1000); // Nascondi lo schermo di caricamento dopo un secondo
+            }
+        }, 100);
+        // Ottieni il modal
+        const modal = document.getElementById("contactModal");
+        const closeModal = document.getElementById("closeModal");
+
+        // Aggiungi un evento al link "Contatti" per aprire il modal
+        document.querySelector('a[href="#contact"]').addEventListener("click", function (event) {
+            event.preventDefault(); // Previene il comportamento di default del link
+            modal.style.display = "block"; // Mostra il modal
         });
 
-        // Animazione del titolo della sezione al passaggio del mouse
-        const sectionTitles = document.querySelectorAll('.section-title');
-        sectionTitles.forEach(title => {
-            title.addEventListener('mouseenter', () => {
-                title.style.color = '#03dac6';
-            });
-            title.addEventListener('mouseleave', () => {
-                title.style.color = '#6200ee';
-            });
-        });
-
-        // Aggiunta dinamica di un nuovo progetto
-        function addNewProject() {
-            const projectsGrid = document.querySelector('.projects-grid');
-            const newProject = document.createElement('div');
-            newProject.className = 'card project-card hidden';
-            newProject.innerHTML = `
-                <img src="https://source.unsplash.com/random/400x300/?technology" alt="Nuovo Progetto">
-                <h3>Nuovo Progetto</h3>
-                <p>Questo progetto è stato aggiunto dinamicamente!</p>
-            `;
-            projectsGrid.appendChild(newProject);
-            observer.observe(newProject);
+        // Aggiungi un evento per chiudere il modal quando si clicca sulla X
+        closeModal.onclick = function () {
+            modal.style.display = "none"; // Nasconde il modal
         }
 
-        // Aggiungi un nuovo progetto dopo 15 secondi
-        setTimeout(addNewProject, 15000);
-
-        // Barra di progresso verticale
-        function updateProgressBar() {
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-            
-            const progressBar = document.querySelector('.progress-bar');
-            progressBar.style.height = scrollPercentage + '%';
-            
-            // Effetto parallasse per la barra di progresso
-            progressBar.style.filter = `hue-rotate(${scrollPercentage * 3.6}deg)`;
+        // Chiudi il modal quando si clicca all'esterno del contenuto del modal
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none"; // Nasconde il modal
+            }
         }
-
-        window.addEventListener('scroll', updateProgressBar);
-        window.addEventListener('resize', updateProgressBar);
-
-        // Inizializza la barra di progresso
-        updateProgressBar();
     </script>
 </body>
-</html> 
+</html>
